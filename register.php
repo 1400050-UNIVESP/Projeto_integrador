@@ -34,6 +34,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $sexo = trim($_POST["sexo"]);
                     $idade = trim($_POST["idade"]);
                     $email = trim($_POST["email"]);
+                    
                 }
             } else{
                 echo "Ops! Algo deu errado. Por favor, tente novamente mais tarde.";
@@ -87,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Tente executar a declaração preparada
             if($stmt->execute()){
                 // Redirecionar para a página de login
-                header("location: login.php");
+                header("location: index.php");
             } else{
                 echo "Ops! Algo deu errado. Por favor, tente novamente mais tarde.";
             }

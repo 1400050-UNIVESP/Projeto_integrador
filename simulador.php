@@ -86,6 +86,7 @@ include_once 'conectar.php';
 		</form>
 		<hr>
 		<a href="simulador.php">Próxima</a>
+		<a href="welcome.php">Finalizar</a>
 	</div>
 	<figure class="foto-legenda">
 		<footer id="rodape">
