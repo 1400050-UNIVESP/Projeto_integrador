@@ -23,7 +23,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <body>
    <h1 class="my-5">Bem Vindo, <b><?php echo htmlspecialchars($_SESSION["username"]);?></b> ao Vestibular Descomplicado UNIVESP.</h1>
     <p>
-        <a href="administração.php" class="btn btn-primary">Área de Administração</a>
+        <a href="administracao.php" class="btn btn-primary">Área de Administração</a>
         <a href="crud.php" class="btn btn-primary">Inserir Perguntas e Respostas</a>
         <a href="simulador.php" class="btn btn-success">Testar conhecimento</a>
         <a href="reset-password.php" class="btn btn-warning">Redefina sua senha</a>
