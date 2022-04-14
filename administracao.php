@@ -1,6 +1,16 @@
 <?php
 session_start();
-include_once 'conectar.php';
+
+// Verifique se o usuário está logado, se não, redirecione-o para uma página de login
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+	header("location: login.php");
+	exit;
+}
+include "conectar2.php";
+
+if ($con->connect_error) {
+	die("A conexão falhou: " . $con->connect_error);
+}
 
 $sql = "SELECT id, username, email, nivel FROM users";
 $result = $con->query($sql);
@@ -20,42 +30,38 @@ $result = $con->query($sql);
 	<div id="interface">
 		<header id="cabecalho">
 			<hgroup>
-				<h1>cadastro Usuários</h1>
+				<h1>CADASTRO DE USUÁRIOS</h1>
+				<h2>Sr(a) Administrador, ao realizar Alterações digitar todos os camposdo Usuário</h2>
 			</hgroup>
 			<nav id="menu">
 				<h1>Menu Principal</h1>
 				<ul>
-					<li onmouseover="mudaFoto ()"><a onclick="cadastrarExtintor()">Cadastrar</a></li>
-					<li onmouseover="mudaFoto ()"><a onclick="alterarExtintor()">Alterar</a></li>
-					<li onmouseover="mudaFoto ()"><a onclick="deletarExtintor()">Deletar</a></li>
-					<li onmouseover="mudaFoto ()"><a href="index.php">Voltar</a></li>
+					<li><a onclick="alterarUsuario()">Alterar</a></li>
+					<li><a onclick="deletarUsuario()">Deletar</a></li>
+					<li><a href="welcome2.php">Voltar</a></li>
 				</ul>
 				</ul>
 			</nav>
-			<div class="tabela_extintores">
+			<div class="tabela_usuarios">
 				<?php
 
 				if ($result !== false && $result->num_rows > 0) {
 					echo '
-				<table border="1" cellspacing="2" cellpadding="3" style="width: 50%">
+				<table border="1" cellspacing="2" cellpadding="3" style="width: 60%">
 					<tr>
-						<th>ID</th>
-						<th>Local</th>
-						<th>Tipo</th>
-						<th>Capacidade</th>
-						<th>Teste Hidrostático</th>
-						<th>Recarga</th>
+						<th>Id</th>
+						<th>Usuário</th>
+						<th>Usuário=0   Administrador=1</th>
+						<th>e-mail</th>
 					</tr>
 				';
 					while ($row = $result->fetch_assoc()) {
 						echo '
 						<tr> 
-							<td>' . $row['ext_ID'] . '</td> 
-							<td>' . $row['ext_local'] . '</td> 
-							<td>' . $row['tipo'] . '</td> 
-							<td>' . $row['capacidade'] . '</td> 
-							<td>' . $row['TH'] . '</td>
-							<td>' . $row['recarga'] . '</td>							
+							<td>' . $row['id'] . '</td> 
+							<td>' . $row['username'] . '</td> 
+							<td>' . $row['nivel'] . '</td> 
+							<td>' . $row['email'] . '</td> 													
 						</tr>';
 					}
 					echo "</table>";
@@ -63,73 +69,63 @@ $result = $con->query($sql);
 					echo "Não há registros";
 				}
 				$con->close();
-
+				
 				?>
-				<!-- INSERT -->
-				<form class="row g-3" id="inserir_extintor_formulario" action="inserir_extintor.php" method="POST" style="display: none;">
-					<div class="col-md-6">
-						<input class="form-control" type="text" name="idExtintor" placeholder="ID">
-					</div>
-					<div class="col-md-6">
-						<input class="form-control" type="text" name="localExtintor" placeholder="Local">
-					</div>
-					<div class="col-md-6">
-						<textarea class="form-control" type="text" name="tipo" placeholder="Tipo"></textarea>
-					</div>
-					<div class="col-md-6">
-						<input class="form-control" type="text" name="capacidade" placeholder="Capacidade">
-					</div>
-					<div class="col-md-6">
-						<input class="form-control" type="text" name="TH" placeholder="TH">
-					</div>
-					<div class="col-md-6">
-						<input class="form-control" type="text" name="recarga" placeholder="Recarga">
-					</div>
-					<div class="col-md-6">
-						<input class="botao cadastrar_extintor" type="submit" value="Cadastrar">
-					</div>
-				</form>
+				
 				<!-- UPDATE -->
-				<form class="row g-3" id="alterar_extintor_formulario" action="alterar_extintor.php" method="POST" style="display: none;">
+				<form class="row g-3" id="alterar_usuario_formulario" action="alterar_usuario.php" method="POST" style="display: none;">
 					<div class="col-md-6">
-						<input class="form-control" type="text" name="idUpdate" placeholder="ID">
+						<input class="form-control" type="text" name="idUpdate" placeholder="Id">
 					</div>
 					<div class="col-md-6">
-						<input class="form-control" type="text" name="localUpdate" placeholder="Local">
+						<input class="form-control" type="text" name="usernameUpdate" placeholder="Usuário">
 					</div>
 					<div class="col-md-6">
-						<textarea class="form-control" type="text" name="tipoUpdate" placeholder="Tipo"></textarea>
+						<textarea class="form-control" type="text" name="nivelUpdate" placeholder="Usuário - Administrador"></textarea>
 					</div>
 					<div class="col-md-6">
-						<input class="form-control" type="text" name="capacidadeUpdate" placeholder="Capacidade">
+						<input class="form-control" type="text" name="emailUpdate" placeholder="e-mail">
 					</div>
 					<div class="col-md-6">
-						<input class="form-control" type="text" name="THUpdate" placeholder="TH">
-					</div>
-					<div class="col-md-6">
-						<input class="form-control" type="text" name="recargaUpdate" placeholder="Recarga">
-					</div>
-					<div class="col-md-6">
-						<input class="botao alterar_extintor" type="submit" value="Alterar">
+						<input class="botao alterar_usuario" type="submit" value="Alterar">
 					</div>
 				</form>
 				<!-- DELETE -->
-				<form class="row g-3" id="deletar_extintor_formulario" action="deletar_extintor.php" method="POST" style="display: none;">
+				<form class="row g-3" id="deletar_usuario_formulario" action="deletar_usuario.php" method="POST" style="display: none;">
 					<div class="col-md-6">
-						<input class="form-control" type="text" name="consultadelete" placeholder="ID">
+						<input class="form-control" type="text" name="consultadelete" placeholder="Id">
 					</div>
 					<div class="col-md-6">
-						<input class="botao cadastrar_extintor" type="submit" value="Deletar">
+						<input class="botao cadastrar_usuario" type="submit" value="Deletar">
 					</div>
 				</form>
 			</div>
 		</header>
-		<figure class="foto-legenda">
-			<footer id="rodape">
-            <p>Copyright &copy; 2022 - by UNIVESP - Grupo 087 - Projeto Integrador 2 - Polo Avaré e São Vicente</p>
-			</footer>
 	</div>
-	<script src="_javascript/funcoes.js"></script>
+	<script>
+		function alterarUsuario() {
+			var usuarioForm = document.getElementById("alterar_usuario_formulario");
+			usuarioForm.classList.toggle("visible");
+
+			if (usuarioForm.classList.contains("visible")) {
+				usuarioForm.style.display = 'inherit';
+			} else {
+				usuarioForm.style.display = 'none';
+			}
+		}
+
+		function deletarUsuario() {
+			var usuarioForm = document.getElementById("deletar_usuario_formulario");
+			usuarioForm.classList.toggle("visible");
+
+			if (usuarioForm.classList.contains("visible")) {
+				usuarioForm.style.display = 'inherit';
+			} else {
+				usuarioForm.style.display = 'none';
+			}
+		}
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
