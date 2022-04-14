@@ -1,12 +1,7 @@
-function mudaFoto (foto)
-{ 
-	document.getElementById("icone").src = foto;
-}
+// Formulários Usuários
 
-// Formulários Extintores
-
-function cadastrarExtintor() {
-	var vistoriaForm = document.getElementById("inserir_extintor_formulario");
+function alterarUsuario() {
+	var vistoriaForm = document.getElementById("alterar_usuario_formulario");
 	vistoriaForm.classList.toggle("visible");
 
 	if (vistoriaForm.classList.contains("visible")) {
@@ -16,18 +11,7 @@ function cadastrarExtintor() {
 	}
 }
 
-function alterarExtintor() {
-	var vistoriaForm = document.getElementById("alterar_extintor_formulario");
-	vistoriaForm.classList.toggle("visible");
-
-	if (vistoriaForm.classList.contains("visible")) {
-		vistoriaForm.style.display = 'inherit';
-	} else {
-		vistoriaForm.style.display = 'none';
-	}
-}
-
-function deletarExtintor() {
+function deletarUsuario() {
 	var vistoriaForm = document.getElementById("deletar_extintor_formulario");
 	vistoriaForm.classList.toggle("visible");
 
