@@ -1,18 +1,13 @@
 <?php
 session_start();
 
-// Verifique se o usuário está logado, se não, redirecione-o para uma página de login
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-	header("location: login.php");
-	exit;
-}
 include "conectar2.php";
 
 if ($con->connect_error) {
 	die("A conexão falhou: " . $con->connect_error);
 }
 
-$sql = "SELECT id, username, email, nivel FROM users";
+$sql = "SELECT * FROM alternativas";
 $result = $con->query($sql);
 
 ?>
@@ -22,7 +17,7 @@ $result = $con->query($sql);
 
 <head>
 	<meta charset="UTF-8" />
-	<title> Administrador</title>
+	<title> Cadastro de Respostas</title>
 	<link rel="stylesheet" type="text/css" href="_css/estilo2.css" />
 </head>
 
@@ -30,38 +25,39 @@ $result = $con->query($sql);
 	<div id="interface">
 		<header id="cabecalho">
 			<hgroup>
-				<h1>CADASTRO DE USUÁRIOS</h1>
-				<h2>Sr(a) Administrador(a), ao realizar Alterações digitar todos os campos do Usuário</h2>
+				<h1>Respostas</h1>
 			</hgroup>
 			<nav id="menu">
 				<h1>Menu Principal</h1>
 				<ul>
-					<li><a onclick="alterarUsuario()">Alterar</a></li>
-					<li><a onclick="deletarUsuario()">Deletar</a></li>
+                    <li><a onclick="iserirRespostas()">Inserir</a></li>
+					<li><a onclick="alterarRespostas()">Alterar</a></li>
+					<li><a onclick="deletarRespostas()">Deletar</a></li>
 					<li><a href="welcome2.php">Voltar</a></li>
 				</ul>
 				</ul>
 			</nav>
-			<div class="tabela_usuarios">
+			<div class="tabela_perguntas">
 				<?php
 
 				if ($result !== false && $result->num_rows > 0) {
 					echo '
-				<table border="1" cellspacing="2" cellpadding="3" style="width: 60%">
+				<table border="1" cellspacing="2" cellpadding="3" style="width: 100%">
 					<tr>
 						<th>Id</th>
-						<th>Usuário</th>
-						<th>Usuário=0   Administrador=1</th>
-						<th>e-mail</th>
+                        <th>Respostas</th>
+						<th>Id Pergunta</th>
+						<th>Correta=1 - Errada=2</th>
 					</tr>
 				';
 					while ($row = $result->fetch_assoc()) {
 						echo '
 						<tr> 
 							<td>' . $row['id'] . '</td> 
-							<td>' . $row['username'] . '</td> 
-							<td>' . $row['nivel'] . '</td> 
-							<td>' . $row['email'] . '</td> 													
+							<td>' . $row['resposta'] . '</td> 
+							<td>' . $row['pergunta_id'] . '</td>
+							<td>' . $row['val_resposta'] . '</td> 																	
+ 																	
 						</tr>';
 					}
 					echo "</table>";
@@ -71,7 +67,18 @@ $result = $con->query($sql);
 				$con->close();
 				
 				?>
-				
+				<!-- INSERT -->
+				<form class="row g-3" id="inserir_perguntas_formulario" action="inserir_perguntas.php" method="POST" style="display: none;">
+					<div class="col-md-6">
+						<input class="form-control" type="text" name="idInsert" placeholder="ID">
+					</div>
+					<div class="col-md-6">
+						<input class="form-control" type="text" name="questaoInsert" placeholder="questao">
+					</div>
+					<div class="col-md-6">
+						<input class="botao cadastrar_pergunta" type="submit" value="Cadastrar">
+					</div>
+				</form>
 				<!-- UPDATE -->
 				<form class="row g-3" id="alterar_usuario_formulario" action="alterar_usuario.php" method="POST" style="display: none;">
 					<div class="col-md-6">
@@ -103,7 +110,16 @@ $result = $con->query($sql);
 		</header>
 	</div>
 	<script>
-		
+		function inserirUsuario() {
+			var usuarioForm = document.getElementById("inserir_usuario_formulario");
+			usuarioForm.classList.toggle("visible");
+
+			if (usuarioForm.classList.contains("visible")) {
+				usuarioForm.style.display = 'inherit';
+			} else {
+				usuarioForm.style.display = 'none';
+			}
+		}
 		function alterarUsuario() {
 			var usuarioForm = document.getElementById("alterar_usuario_formulario");
 			usuarioForm.classList.toggle("visible");
@@ -128,10 +144,5 @@ $result = $con->query($sql);
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
-<figure class="foto-legenda">
-		<footer id="rodape">
-			<p>Copyright &copy; 2022 - by UNIVESP - Grupo 087 - Projeto Integrador 2 - Polo Avaré e São Vicente</p>
-		</footer>
-	</figure>
 	</div>
 </html>

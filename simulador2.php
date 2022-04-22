@@ -82,11 +82,11 @@ include_once 'conectar.php';
 				echo "</div>";
 			?>
 			</div>
-			<input type="submit" name="valResposta" value="Enviar">
+			<input type="submit" name="valResposta" value="Enviar">			      
 		</form>
 		<hr>
-		<a href="simulador.php">Próxima</a>
-		<a href="welcome2.php">Finalizar</a>
+		<a href="simulador.php"><button>Próxima</a>
+		<a href="welcome2.php"><button>Sair</a>
 	</div>
 	<figure class="foto-legenda">
 		<footer id="rodape">

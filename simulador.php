@@ -85,8 +85,8 @@ include_once 'conectar.php';
 			<input type="submit" name="valResposta" value="Enviar">
 		</form>
 		<hr>
-		<a href="simulador.php">Próxima</a>
-		<a href="welcome.php">Finalizar</a>
+		<a href="simulador.php"><button>Próxima</a>
+		<a href="welcome.php"><button>Sair</a>
 	</div>
 	<figure class="foto-legenda">
 		<footer id="rodape">
