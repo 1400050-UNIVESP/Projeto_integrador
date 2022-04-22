@@ -46,7 +46,7 @@ $result = $con->query($sql);
 						<input class="form-control" type="text" name="respostaInsert" placeholder="resposta">
 					</div>
 					<div class="col-md-6">
-						<input class="form-control" type="text" name="pergunta_idInsert" placeholder="pergunta_id">
+						<input class="form-control" type="text" name="pergunta_idInsert" placeholder="resposta_id">
 					</div>
 					<div class="col-md-6">
 						<input class="form-control" type="text" name="val_respostaInsert" placeholder="val_resposta">
@@ -59,16 +59,19 @@ $result = $con->query($sql);
 				<form class="row g-3" id="alterar_respostas_formulario" action="alterar_respostas.php" method="POST" style="display: none;">
 					<div class="col-md-6">
 						<label>Digite o ID:</label>
-						<input class="form-control" type="text" name="idUpdate" placeholder="Id">
+						<input class="form-control" type="text" name="idUpdate" placeholder="">
 					</div>
 					<div class="col-md-6">
-						<input class="form-control" type="text" name="respostaUpdate" placeholder="resposta">
+						<label>Resposta:</label>
+						<input class="form-control" type="text" name="respostaUpdate" placeholder="">
 					</div>
 					<div class="col-md-6">
-						<input class="form-control" type="text" name="pergunta_idUpdate" placeholder="pergunta_id">
+						<label>ID da Pergunta:</label>
+						<input class="form-control" type="text" name="pergunta_idUpdate" placeholder="">
 					</div>
 					<div class="col-md-6">
-						<input class="form-control" type="text" name="val_respostaUpdate" placeholder="val_resposta">
+						<label>Correta=1 - Errada=2:</label>
+						<input class="form-control" type="text" name="val_respostaUpdate" placeholder="">
 					</div>
 					<div class="col-md-6">
 						<input class="botao alterar_resposta" type="submit" value="Alterar">
@@ -78,7 +81,7 @@ $result = $con->query($sql);
 				<form class="row g-3" id="deletar_respostas_formulario" action="deletar_respostas.php" method="POST" style="display: none;">
 					<div class="col-md-6">
 						<label>Digite o ID da Resposta que quer apagar:</label>
-						<input class="form-control" type="text" name="consultadelete" placeholder="Id">
+						<input class="form-control" type="text" name="consultadelete" placeholder="">
 					</div>
 					<div class="col-md-6">
 						<label>Tem certeza que quer Apagar?</label>
