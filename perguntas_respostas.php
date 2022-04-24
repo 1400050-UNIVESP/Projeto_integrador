@@ -42,7 +42,7 @@ $result = $con->query($sql);
 				<table border="1" cellspacing="2" cellpadding="3" style="width: 100%">
 					<tr>
 						<th>Id</th>
-						<th>Disciplina</th>
+						<th>(Instituição,ano,P nº)</th>
 						<th>Imagem</th>
 						<th>Respostas</th>
 						<th>Correta=1 - Errada=2</th>
