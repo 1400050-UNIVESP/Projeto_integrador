@@ -130,7 +130,7 @@ $result = $con->query($sql);
 </body>
 <figure class="foto-legenda">
 		<footer id="rodape">
-			<p>Copyright &copy; 2022 - by UNIVESP - Grupo 087 - Projeto Integrador 2 - Polo Avaré e São Vicente</p>
+			<p>Copyright &copy; 2022 - by UNIVESP - Grupo 087 - Projeto Integrador 2 - Polo Avaré, Vila Curuçá e São Vicente</p>
 		</footer>
 	</figure>
 	</div>

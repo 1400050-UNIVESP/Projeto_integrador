@@ -40,9 +40,6 @@ $result = $con->query($sql);
 				<!-- INSERT -->
 				<form class="row g-3" id="inserir_respostas_formulario" action="inserir_respostas.php" method="POST" style="display: none;">
 					<div class="col-md-6">
-						<input class="form-control" type="text" name="idInsert" placeholder="ID">
-					</div>
-					<div class="col-md-6">
 						<input class="form-control" type="text" name="respostaInsert" placeholder="resposta">
 					</div>
 					<div class="col-md-6">

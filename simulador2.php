@@ -56,7 +56,8 @@ include_once 'conectar.php';
 				extract($row_pergunta);
 				echo "<div style='display: flex; flex-direction: column;'>" . $questao . "<br><br>";
 				echo "<input type='hidden' name='id_pergunta' value='$id'>";
-				echo '<img src="data:image/jpeg;base64,'.base64_encode($row_pergunta['Imagem']).'"/>';
+				//Transformando STRING para Base64 e depois para imagem
+				echo '<img src="data:image/jpeg;base64,'.base64_decode(base64_encode($row_pergunta['Imagem'])).'"/>';
 				echo "</div>";
 				echo "<div style='display: flex; flex-direction: column;'>";
 				echo "<label>Alternativas:</label><br><br>";
@@ -85,12 +86,12 @@ include_once 'conectar.php';
 			<input type="submit" name="valResposta" value="Enviar">			      
 		</form>
 		<hr>
-		<a href="simulador.php"><button>Próxima</a>
+		<a href="simulador2.php"><button>Próxima</a>
 		<a href="welcome2.php"><button>Sair</a>
 	</div>
 	<figure class="foto-legenda">
 		<footer id="rodape">
-			<p>Copyright &copy; 2022 - by UNIVESP - Grupo 087 - Projeto Integrador 2 - Polo Avaré e São Vicente</p>
+			<p>Copyright &copy; 2022 - by UNIVESP - Grupo 087 - Projeto Integrador 2 - Polo Avaré, Vila Curuçá e São Vicente</p>
 		</footer>
 	</figure>
 	</div>

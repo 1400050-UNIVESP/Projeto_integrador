@@ -173,7 +173,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </body>
 <figure class="foto-legenda">
 			<footer id="rodape">
-				<p>Copyright &copy; 2022 - by UNIVESP - Grupo 087 - Projeto Integrador 2 - Polos Avaré e São Vicente<br />
+				<p>Copyright &copy; 2022 - by UNIVESP - Grupo 087 - Projeto Integrador 2 - Polos Avaré, Vila Curuçá e São Vicente<br />
 			</footer>
 </html>
 

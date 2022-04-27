@@ -52,8 +52,8 @@ $result = $con->query($sql);
 						echo '
 						<tr> 
 							<td>' . $row['id'] . '</td> 
-							<td>' . $row['questao'] . '</td> 
-							<td><img src="data:image/jpeg;base64,'.base64_encode($row['Imagem']) .'" width="50%" height="50%"/>
+							<td>' . $row['questao'] . '</td>
+							<td><img src="data:image/jpeg;base64,'.base64_decode(base64_encode($row['Imagem'])) .'" width="50%" height="50%"/>
 							<td>' . $row['resposta'] . '</td>
 							<td>' . $row['val_resposta'] . '</td> 																	
  																	
