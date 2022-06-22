@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once 'conectar.php';
+include "header2.php";
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +16,7 @@ include_once 'conectar.php';
 <body>
 	<div id="interface">
 		<?php
-			$dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+		$dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 			
 			if(!empty($dados['valResposta'])){
 
@@ -25,19 +26,19 @@ include_once 'conectar.php';
 				$result_val_resposta->execute();
 				$row_val_resposta = $result_val_resposta->fetch(PDO::FETCH_ASSOC);
 				if($row_val_resposta['val_resposta'] == 1){
-					$_SESSION['msg'] = "<p style='color:green; margin-left: -42px;'>Resposta Correta</p>";
+					$_SESSION['msg'] = "<p style='color:green; font-weight: bold; margin-top: 20px; margin-left: 760px;'>Resposta Correta</p>";
 				}else{
-					$_SESSION['msg'] = "<p style='color:red; margin-left: -42px;'>Resposta Incorreta</p>";
+					$_SESSION['msg'] = "<p style='color:red; font-weight: bold; margin-top: 20px; margin-left: 760px;'>Resposta Incorreta</p>";
 				}
 
 				
-				$query_pergunta = "SELECT id, questao, Imagem FROM perguntas WHERE id=:id LIMIT 1";
+				$query_pergunta = "SELECT id, questao, Imagem, videox FROM perguntas WHERE id=:id LIMIT 1";
 				$result_pergunta = $conn->prepare($query_pergunta);
 				$result_pergunta->bindParam(':id', $dados['id_pergunta'], PDO::PARAM_INT);
 				$result_pergunta->execute();
 			}else{
 				
-				$query_pergunta = "SELECT id, questao, Imagem FROM perguntas ORDER BY RAND() LIMIT 1";
+				$query_pergunta = "SELECT id, questao, Imagem, videox FROM perguntas ORDER BY RAND() LIMIT 1";
 				$result_pergunta = $conn->prepare($query_pergunta);
 				$result_pergunta->execute();
 			}    
@@ -47,7 +48,7 @@ include_once 'conectar.php';
 			unset($_SESSION['msg']);
 			}
 		?>
-		<h1>Vestibular Descomplicado</h1>
+		<h1></h1>
 		<form action="" method="POST">
 			<div style="display: flex; justify-content: space-evenly">
 		<?php
@@ -61,7 +62,7 @@ include_once 'conectar.php';
 				echo "</div>";
 				echo "<div style='display: flex; flex-direction: column;'>";
 				echo "<label>Alternativas:</label><br><br>";
-
+				
 				$query_resposta = "SELECT id AS id_resposta, resposta FROM alternativas WHERE pergunta_id = $id ORDER BY id ASC";
 				$result_resposta = $conn->prepare($query_resposta);
 				$result_resposta->execute();
@@ -83,12 +84,16 @@ include_once 'conectar.php';
 				echo "</div>";
 			?>
 			</div>
-			<input type="submit" name="valResposta" value="Enviar">			      
+			<input type="submit" name="valResposta" value="Enviar">
+			
+			<?php echo "<a href=" . $videox . " target='_blank'>Vídeo-Aula</a>"; ?>
+			
+			
 		</form>
 		<hr>
 		<a href="simulador2.php"><button>Próxima</a>
 		<a href="welcome2.php"><button>Sair</a>
-	</div>
+		</div>
 	<figure class="foto-legenda">
 		<footer id="rodape">
 			<p>Copyright &copy; 2022 - by UNIVESP - Grupo 087 - Projeto Integrador 2 - Polo Avaré, Vila Curuçá e São Vicente</p>

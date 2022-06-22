@@ -45,6 +45,10 @@ $result = $con->query($sql);
 						<input class="form-control" type="text" name="questaoInsert" placeholder="">
 					</div>
 					<div class="col-md-6">
+						<label>Insira link do Vídeo (Youtube):</label>
+						<input class="form-control" type="text" name="videoxInsert" placeholder="">
+					</div>
+					<div class="col-md-6">
 						<label>Inserir Imagem (JPEG):</label>
 						<form method="POST" action="" enctype="multipart/form-data">
 						<input class="form-control" name="ImagemInsert" type="file">
@@ -63,6 +67,10 @@ $result = $con->query($sql);
 					<div class="col-md-6">
 					 <label>Digite Vestibular (SIGLA UNIVERSIDADE,ANO,PERGUNTA Nº):</label>
 						<input class="form-control" type="text" name="questaoUpdate" placeholder="">
+					</div>
+					<div class="col-md-6">
+						<label>Insira link do Vídeo (Youtube):</label>
+						<input class="form-control" type="text" name="videoxUpdate" placeholder="">
 					</div>
 					<div class="col-md-6">
 						<label>Inserir Imagem (JPEG):</label>

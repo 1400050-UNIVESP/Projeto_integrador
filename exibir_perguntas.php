@@ -47,6 +47,7 @@ $result = $con->query($sql);
 						<th>Id</th>
 						<th>Disciplina</th>
 						<th>Imagem</th>
+						<th>videox</th>
 					</tr>
 				';
 					while ($row = $result->fetch_assoc()) {
@@ -54,7 +55,8 @@ $result = $con->query($sql);
 						<tr> 
 							<td>' . $row['id'] . '</td> 
 							<td>' . $row['questao'] . '</td> 
-							<td><img src="data:image/jpeg;base64,'.base64_encode($row['Imagem']) .'" width="50%" height="50%"/>	
+							<td><img src="data:image/jpeg;base64,'.base64_encode($row['Imagem']) .'" width="50%" height="50%"/>
+							<td>' . $row['videox'] . '</td>
 						</tr>';
 					}
 					echo "</table>";

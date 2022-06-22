@@ -9,12 +9,13 @@ $row = $sql->fetch_assoc();;
 
 //Proximo ID (Ultimo ID +1)
 $idPergunta = $row['id']+1;
-
 $questao = $_POST['questaoInsert'];
+$videox = $_POST['videoxInsert'];
+
 
 //Transformando Imagem para a base64
 $data = file_get_contents($_FILES['ImagemInsert']["tmp_name"]);
 $Imagem = base64_encode($data);
 
-mysqli_query($con, "INSERT INTO perguntas(id, questao, Imagem) VALUES ('{$idPergunta}','{$questao}','{$Imagem}')");
+mysqli_query($con, "INSERT INTO perguntas(id, questao, Imagem, videox) VALUES ('{$idPergunta}','{$questao}','{$Imagem}','{$videox}')");
 header('location:crud.php');

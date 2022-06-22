@@ -45,6 +45,7 @@ $result = $con->query($sql);
 						<th>(Instituição,ano,P nº)</th>
 						<th>Imagem</th>
 						<th>Respostas</th>
+						<th>Video</th>
 						<th>Correta=1 - Errada=2</th>
 					</tr>
 				';
@@ -55,6 +56,7 @@ $result = $con->query($sql);
 							<td>' . $row['questao'] . '</td>
 							<td><img src="data:image/jpeg;base64,'.base64_decode(base64_encode($row['Imagem'])) .'" width="50%" height="50%"/>
 							<td>' . $row['resposta'] . '</td>
+							<td>' . $row['videox'] . '</td>
 							<td>' . $row['val_resposta'] . '</td> 																	
  																	
 						</tr>';

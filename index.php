@@ -1,14 +1,5 @@
 <?php
 
-// Inicialize a sessão
-session_start();
- 
-// Verifique se o usuário já está logado, em caso afirmativo, redirecione-o para a página de boas-vindas
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: welcome.php");
-    exit;
-}
- 
 // Incluir arquivo de configuração
 require_once "config.php";
  
@@ -67,7 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                                      
                             
                             // Redirecionar o usuário para a página de boas-vindas
-                            if ($_session["nivel"] = 0){header("location: welcome.php");}else{header("location: welcome2.php");}
+                            if ($nivel == 1){header("location: welcome2.php");}else{header("location: welcome.php");}
                         } else{
                             // A senha não é válida, exibe uma mensagem de erro genérica
                             $login_err = "Nome de usuário ou senha inválidos.";
